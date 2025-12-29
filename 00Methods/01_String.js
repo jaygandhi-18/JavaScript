@@ -2,6 +2,9 @@ const myString = "Hello My Name Is Jay";
 const newString = "           , I am 20 years old         ";
 const numbers = 1234567890;
 
+// importent methods
+// length,toUpperCase,toLowerCase,includes,slice,trim,split,replace/replaceAll,startsWith,endWith,indexOf
+
 // Access & Character Methods
 
 console.log(myString.charAt(1));            // character at key position

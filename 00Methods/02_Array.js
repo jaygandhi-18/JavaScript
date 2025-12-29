@@ -1,82 +1,107 @@
 const myArray = [10, 20, 30, 40, 50];
 const mixedArray = [1, "Jay", true, null, { age: 20 }, [100, 200]];
 
-// Accessing Elements
+// importent methods
+// push,pop,map,filter,reduce,forEach,find,inclues,slice,splice,sort,join,flat
 
-console.log(myArray[0]);              // first element
-console.log(myArray.at(-1));          // last element
-console.log(myArray.length);          // total number of elements
+// 1. Creation & Static Methods
 
-// Adding & Removing (MUTATES ORIGINAL ARRAY)
+Array(newArr = [1,2,3,4,5])                // to create new array
+console.log(newArr);
+const arr = Array.of(6,7,8,9,0)            // to Create array from given list 
+console.log(arr);
+const arr2 = Array.from("abcd")            // create array form given iterable
+console.log(arr2);
+console.log(Array.isArray(arr));           // true or false
 
-myArray.push(60);                     // add element at end
-myArray.pop();                        // remove element from end
-myArray.unshift(0);                   // add element at start
-myArray.shift();                      // remove element from start
+// 2. Length
 
-// Combining & Slicing
+console.log(arr.length);                // tell us total length of array
 
-console.log(myArray.concat([60, 70])); // merge arrays 2 array
-console.log(myArray.slice(1, 4));      // extract from index 1 to 3 last key value does not count
-console.log(myArray.splice(2, 1, 99)); // remove 1 item from index 2 & insert 99
+// 3. Adding / Removing Elements (IMPORTANT)
 
-// Searching & Checking
+myArray.push(60);               // add 60 in array at last
+myArray.pop();                  // remove last value from array
 
-console.log(myArray.includes(30));     // true / false
-console.log(myArray.indexOf(40));      // index or -1
-console.log(myArray.lastIndexOf(20));  // last occurrence index
-console.log(Array.isArray(myArray));   // check if array
+myArray.unshift(1);             // add 1 in array at Start
+myArray.shift();                // Remove first value from array
 
-// Iteration (LOOPS)
+// 4. Merging & Copying
 
-myArray.forEach((item, index) => {
-  console.log(item, index);            // loops over array (arrow function)
-});
+const concatArr = newArr.concat(arr)            // MERGE 2 array (but only 2 at once)
+console.log(concatArr);
 
-const doubled = myArray.map(num => num * 2);       // transform each element
-const filtered = myArray.filter(num => num > 25); // filter based on condition
-const total = myArray.reduce((acc, curr) => acc + curr, 0); // reduce to single value
+const sliArr = concatArr.slice(1,8);            // start from 1 key value and cut till 8 key value but 8th not inclues
+console.log(sliArr);
 
-// Sorting & Reversing
+// splice()       // also same as string splice(0 `start from 0`, 3 `remove 3 value`, 1,2,3 `add this value from 0`)
 
-const nums = [3, 1, 10, 5];
+const withArr = concatArr.copyWithin(0, 6, 7)
+console.log(withArr);
+// its target 0 and slecet key value 6 ot 7 means only 1 so it replace selected value to target ones
+// if we select more than one value its revmove more value from start and enter selected value at start
+// leanght not change
 
-nums.sort();                           // WRONG for numbers (works in UTF-16 Codes)
-nums.sort((a, b) => a - b);            // for number ascending sort
-nums.sort((a, b) => b - a);            // for number descending sort
-nums.reverse();                        // reverse array 
+//fill(value, start, end)
+const fillArr = concatArr.fill(6) // fill arr with given value
+concatArr.fill(0,)
+console.log(fillArr);
 
-// Flat & Fill
+// 5. Searching & Checking
 
-const nested = [1, [2, [3, 4]]];
+const findArr = ["cat","dog","pig","fish","dog","nose","ear","pig"];
 
-console.log(nested.flat());            // [1, 2, [3, 4]] flat(infinity)for all
-console.log(nested.flat(2));           // [1, 2, 3, 4]
+console.log(findArr.includes("cat"));             // true or flase
+console.log(findArr.indexOf("pig"));              // find first index number
+console.log(findArr.lastIndexOf("pig"));          // find last index number
+// console.log(findArr.find());                   // find need callback fn and first match only
+// console.log(findArr.findIndex());              // also need callback fn and first match only
+// findLast()                   // Last match
+// findLastIndex()              // Index from end
 
-console.log(myArray.fill(0, 1, 3));    // fill 0 from index 1 to 2
+// 6. Iteration Methods (VERY IMPORTANT)
 
-// Joining & Converting
+// forEach()	nothing    // loop
+// map()	new array    // apply function array
+// filter()	new array    // filter from array
+// reduce()	single value    // take array and writen in one value 
+// reduceRight()	single value    // same as reduce but start from right side 
+// some()	boolean    // means if one condision match is say yes
+// every()	boolean    // if single condition doesnot match it says no
 
-console.log(myArray.join("-"));        // convert array to string
-console.log(myArray.toString());       // array → string
-console.log(String(myArray));          // array → string
+// 7. Sorting & Reversing
 
-// Finding Elements
+// sort()                // Sort array in UTF-16 code formate
+// sort((a,b) => a-b)    // sort for number
+// reverse()	         // reverse array 
+// toSorted()            // sort array and wite in new array
+// toReversed()          // reverse array and wite in new array
 
-console.log(myArray.find(num => num > 25));       // first matching element
-console.log(myArray.findIndex(num => num > 25));  // index of first match
+// 8. Converting to String
 
-// Condition Checking
+// join()                   // conver into string
+//join()      // "1,2,3"
+//join("")    // "123"
+//join("-")   // "1-2-3"
 
-console.log(myArray.some(num => num > 40));       // at least one true
-console.log(myArray.every(num => num > 5));       // all must be true
+// toString()               // conver into sring but , only
+// toLocaleString()         // conver into string in locale formet
+// Locale means (language, region, and cultural conventions)
 
-// Copying & Creating Arrays
+// 9. Flattening Arrays
 
-const copy1 = [...myArray];            // spread operator (BEST way)
-const copy2 = Array.from(myArray);     // create array from iterable
-const copy3 = Array.of(1, 2, 3);        // create array from arguments
+// flat()        // flar array means if array in array in array its make in sigle array
+// flat(infinity) means all
 
-// valueOf()
+// flatmap()     // map() + flat(1)
 
-console.log(myArray.valueOf());        // returns array itself
+// 10. Iterator Methods
+
+// keys()          // to access keys 
+// values()        // to access values
+// entries()       // to access key : value
+
+// 11. New Immutable Methods
+
+// with()               // replace one item with out touch array
+// toSpliced()          // splice() but safe
